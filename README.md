@@ -2,7 +2,7 @@
 
 This code runs on RaspberryPi 3 and is used to check our Ping Pong table room in my company's offices to see if it's available or not :)
 It uses a PIR motion detection sensor to detect movement and updates the Mysql DB accordingly.
-It currently only provides a REST API endpoint to query the status but later on we will add a Slack bot user as well.
+In addition, a Slack bot queries the DB to determine if there's an ongoing open session.
 
 # Pre-Requisites
 
@@ -11,8 +11,9 @@ It currently only provides a REST API endpoint to query the status but later on 
 * Raspbian Jessie
 * Python 2.7
 * Pip
-* Mysql Server
-* Django
+* Mysql server
+* Slack client
+* Slack bot integration token
 * MysqlClient for Python
 
 # Getting Started
@@ -26,10 +27,8 @@ database.user=<user>
 database.password=<password>
 ```
 
-2. Configure the IP address of the RaspberryPi in the `/mysite/mysite/settings.py` file under `ALLOWED_HOSTS`
+2. Run `python motion_detector.py` to begin monitoring
 
-3. Start the server by running `python /mysite/manage.py runserver 0.0.0.0:8080`
+3. Edit `pingpongbot.py` and replace `SLACK_BOT_TOKEN` and `SLACK_BOT_NAME` with the relevant Slack information
 
-4. Run `python motion_detector.py` to begin monitoring
-
-5. Access the URL `<Raspberry Pi IP Address>:8080/myapp` to check the status of the sensor
+4. Run `python pingpongbot.py` to start the Slack bot
