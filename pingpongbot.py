@@ -1,5 +1,4 @@
 import time
-import json
 
 from db_utils import is_open_session_exists
 from slackclient import SlackClient
