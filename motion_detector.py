@@ -1,8 +1,7 @@
-from db_utils import setup_database, handle_motion_detected, handle_no_motion
-
 import RPi.GPIO as GPIO
-import random
 import time
+
+from db_utils import setup_database, handle_motion_detected, handle_no_motion
 
 ObstaclePin = 11
 
@@ -22,10 +21,7 @@ def setup():
     setup_database()
 
 def is_motion_detected():
-    # motion_detected = (0 == GPIO.input(ObstaclePin))
-    #MOCK - UNTIL PROPER SENSOR IS USED
-    motion_detected = bool(random.getrandbits(1))
-    return motion_detected
+    return (0 == GPIO.input(ObstaclePin))
     
 def loop():
     iteration_counter = 0
