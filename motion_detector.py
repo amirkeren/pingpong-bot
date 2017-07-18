@@ -3,7 +3,7 @@ import time
 
 from db_utils import setup_database, handle_motion_detected, handle_no_motion
 
-ObstaclePin = 11
+OBSTACLE_PIN = 11
 
 # The maximum time in seconds allowed for a session to be inactive
 MAX_SESSION_TIME_IN_SECONDS = 60
@@ -15,7 +15,7 @@ DETECTION_INCIDENTS_THRESHOLD = 0.7
 def setup():
     print 'initializing sensor'
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(ObstaclePin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(OBSTACLE_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     print 'initializing db'
     time.sleep(10)
     setup_database()
