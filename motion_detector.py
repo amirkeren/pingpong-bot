@@ -15,13 +15,13 @@ DETECTION_INCIDENTS_THRESHOLD = 0.7
 def setup():
     print 'initializing sensor'
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(OBSTACLE_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(OBSTACLE_PIN, GPIO.IN)
     print 'initializing db'
     time.sleep(10)
     setup_database()
 
 def is_motion_detected():
-    return (0 == GPIO.input(ObstaclePin))
+    return 0 == GPIO.input(ObstaclePin)
     
 def loop():
     iteration_counter = 0
