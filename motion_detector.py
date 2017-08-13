@@ -21,7 +21,7 @@ def setup():
     setup_database()
 
 def is_motion_detected():
-    return 0 == GPIO.input(OBSTACLE_PIN)
+    return GPIO.input(OBSTACLE_PIN)
     
 def loop():
     iteration_counter = 0
