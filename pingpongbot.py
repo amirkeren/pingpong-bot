@@ -19,7 +19,7 @@ def get_slack_bot_id(bot_name):
             print('could not find bot user with the name ' + bot_name)
     return None
 
-BOT_ID = get_slack_bot_id(SLACK_BOT_NAME')
+BOT_ID = get_slack_bot_id(SLACK_BOT_NAME)
 AT_BOT = '<@' + BOT_ID + '>'
 EXAMPLE_COMMAND = 'free'
 
