@@ -6,7 +6,7 @@ from slackclient import SlackClient
 SLACK_BOT_TOKEN = '<your slack bot token here>'
 SLACK_BOT_NAME = '<your slack bot name here>'
 
-def get_slack_bot_id(bot_name):
+def get_slack_bot_id(slack_client, bot_name):
     if __name__ == "__main__":
         api_call = slack_client.api_call('users.list')
         if api_call.get('ok'):
@@ -19,11 +19,11 @@ def get_slack_bot_id(bot_name):
             print('could not find bot user with the name ' + bot_name)
     return None
 
-BOT_ID = get_slack_bot_id(SLACK_BOT_NAME)
+slack_client = SlackClient(SLACK_BOT_TOKEN)
+
+BOT_ID = get_slack_bot_id(slack_client, SLACK_BOT_NAME)
 AT_BOT = '<@' + BOT_ID + '>'
 EXAMPLE_COMMAND = 'free'
-
-slack_client = SlackClient(SLACK_BOT_TOKEN)
 
 def handle_command(command, channel):
     response = 'Hello! I am the ping pong bot! Ask me if the table is free by typing - \"free?\"'
