@@ -37,8 +37,8 @@ def loop():
             iteration_counter = 0
             detection_counter = 0.0
         if (is_motion_detected()):
-	    print_log('motion detected')
             detection_counter += 1
+	    print_log('motion ' + str(detection_counter) + ' detected')
         iteration_counter += 1
         time.sleep(1)
 
