@@ -51,7 +51,7 @@ def handle_motion_detected():
     data = x.fetchall()
     if (len(data) > 0):
         session_id = data[0][0]
-        print_log('updating session', session_id, 'in progress')
+        print_log('updating session ' + str(session_id) + ' in progress')
         update_session(conn, x, session_id)
     else:
         print_log('no open sessions found, adding new session')
@@ -60,7 +60,7 @@ def handle_motion_detected():
     conn.close()
     
 def handle_no_motion(DETECTION_FRAME_LENGTH_IN_SECONDS, MAX_SESSION_TIME_IN_SECONDS):
-    print_log('no motion detected for', DETECTION_FRAME_LENGTH_IN_SECONDS, 'seconds')
+    print_log('no motion detected for ' + str(DETECTION_FRAME_LENGTH_IN_SECONDS) + ' seconds')
     conn = connect_to_db()
     x = conn.cursor()
     print_log('checking open sessions')
@@ -69,12 +69,12 @@ def handle_no_motion(DETECTION_FRAME_LENGTH_IN_SECONDS, MAX_SESSION_TIME_IN_SECO
     if (len(data) > 0):
         session_id = data[0][0]
         last_updated = data[0][1]
-        print_log('session', session_id, 'in progress, checking if it needs to end')
+        print_log('session ' + str(session_id) + ' in progress, checking if it needs to end')
         diff = time.time() - last_updated
         if (diff > MAX_SESSION_TIME_IN_SECONDS):
             close_session(conn, x, session_id)
         else:
-            print_log('session', session_id, 'did not time out yet')
+            print_log('session ' + str(session_id) + ' did not time out yet')
     else:
         print_log('no open sessions')
     x.close()
@@ -87,20 +87,20 @@ def clean_open_sessions(conn, x):
     print_log('cleaned open sessions')
     
 def close_session(conn, x, session_id):
-    print_log('closing session', session_id)
+    print_log('closing session ' + str(session_id))
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime(TIMESTAMP_FORMAT)
     x.execute('UPDATE ' + TABLE_NAME + ' SET end = %s WHERE id = %s', (timestamp, session_id))
     conn.commit()
-    print_log('closed session', session_id)
+    print_log('closed session ' + str(session_id))
     
 def update_session(conn, x, session_id):
-    print_log('updating session', session_id)
+    print_log('updating session ' + str(session_id))
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime(TIMESTAMP_FORMAT)
     x.execute('UPDATE ' + TABLE_NAME + ' SET last_updated = %s WHERE id = %s', (timestamp, session_id))
     conn.commit()
-    print_log('updated session', session_id)
+    print_log('updated session ' + str(session_id))
     
 def add_new_session(conn, x):
     print_log('adding new session')
