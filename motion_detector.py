@@ -1,7 +1,8 @@
 import RPi.GPIO as GPIO
 import time
+import datetime
 
-from db_utils import setup_database, handle_motion_detected, handle_no_motion
+from db_utils import print_log, setup_database, handle_motion_detected, handle_no_motion
 
 OBSTACLE_PIN = 11
 
@@ -10,23 +11,23 @@ MAX_SESSION_TIME_IN_SECONDS = 60
 # The time window in seconds we are looking for consecutive movement
 DETECTION_FRAME_LENGTH_IN_SECONDS = 10
 # The threshold that determines if a movement was detected
-DETECTION_INCIDENTS_THRESHOLD = 0.7
-    
+DETECTION_INCIDENTS_THRESHOLD = 0.4
+
 def setup():
-    print 'initializing sensor'
+    print_log('initializing sensor')
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(OBSTACLE_PIN, GPIO.IN)
-    print 'initializing db'
+    print_log('initializing db')
     time.sleep(10)
     setup_database()
 
 def is_motion_detected():
     return GPIO.input(OBSTACLE_PIN)
-    
+
 def loop():
     iteration_counter = 0
     detection_counter = 0.0
-    print 'started monitoring'
+    print_log('started monitoring')
     while True:
         if (iteration_counter >= DETECTION_FRAME_LENGTH_IN_SECONDS):
             if (detection_counter / iteration_counter >= DETECTION_INCIDENTS_THRESHOLD):
@@ -36,6 +37,7 @@ def loop():
             iteration_counter = 0
             detection_counter = 0.0
         if (is_motion_detected()):
+	    print_log('motion detected')
             detection_counter += 1
         iteration_counter += 1
         time.sleep(1)
@@ -49,4 +51,3 @@ if __name__ == '__main__':
         loop()
     except KeyboardInterrupt:
         destroy()
-        
