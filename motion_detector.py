@@ -30,6 +30,7 @@ def loop():
     iteration_counter = 0
     detection_counter = 0.0
     print_log('started monitoring')
+    # start monitoring for movement
     while True:
 	# if the detection window is over
         if (iteration_counter >= DETECTION_FRAME_LENGTH_IN_SECONDS):
