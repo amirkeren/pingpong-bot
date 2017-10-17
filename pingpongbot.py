@@ -56,8 +56,8 @@ if __name__ == "__main__":
     # establishing connection to bot
     if slack_client.rtm_connect():
         print(SLACK_BOT_NAME + ' connected and running')
+        # start listening for messages
         while True:
-            # start listening for messages
             command, channel = parse_slack_output(slack_client.rtm_read())
             if command and channel:
                 handle_command(command, channel)
