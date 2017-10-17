@@ -4,6 +4,7 @@ import datetime
 
 from db_utils import print_log, setup_database, handle_motion_detected, handle_no_motion
 
+# The physical pin number on the board connected to the DATA output pin of the motion sensor
 OBSTACLE_PIN = 11
 
 # The maximum time in seconds allowed for a session to be inactive
@@ -19,6 +20,7 @@ def setup():
     GPIO.setup(OBSTACLE_PIN, GPIO.IN)
     print_log('initializing db')
     time.sleep(10)
+    # preparing tables, cleaning existing open sessions
     setup_database()
 
 def is_motion_detected():
@@ -29,13 +31,18 @@ def loop():
     detection_counter = 0.0
     print_log('started monitoring')
     while True:
+	# if the detection window is over
         if (iteration_counter >= DETECTION_FRAME_LENGTH_IN_SECONDS):
+	    # if we saw enough movement during that window
+	    # i.e. seconds with movement out of total window time is larger than the threshold
             if (detection_counter / iteration_counter >= DETECTION_INCIDENTS_THRESHOLD):
                 handle_motion_detected()
             else:
                 handle_no_motion(DETECTION_FRAME_LENGTH_IN_SECONDS, MAX_SESSION_TIME_IN_SECONDS)
+	    # reset counters for next detection window
             iteration_counter = 0
             detection_counter = 0.0
+	# if a movement is detected in this particular second
         if (is_motion_detected()):
             detection_counter += 1
 	    print_log('motion ' + str(detection_counter) + ' detected')
