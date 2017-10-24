@@ -6,7 +6,7 @@ In addition, a Slack bot queries the DB to determine if there's an ongoing open 
 
 # Pre-Requisites
 
-* RaspberryPi 3
+* Raspberry Pi
 * PIR motion detector
 * Raspbian Jessie
 
