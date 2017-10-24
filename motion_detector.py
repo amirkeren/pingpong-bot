@@ -5,7 +5,7 @@ import datetime
 from db_utils import print_log, setup_database, handle_motion_detected, handle_no_motion
 
 # The physical pin number on the board connected to the DATA output pin of the motion sensor
-OBSTACLE_PIN = 11
+OBSTACLE_PIN = 7
 
 # The maximum time in seconds allowed for a session to be inactive
 MAX_SESSION_TIME_IN_SECONDS = 60
