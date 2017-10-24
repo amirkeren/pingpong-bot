@@ -12,7 +12,7 @@ In addition, a Slack bot queries the DB to determine if there's an ongoing open 
 
 # Getting Started
 
-1. Run the setup script `./setup.sh`
+1. Run the setup script `setup.sh` to install the various dependencies
 
 2. Edit the `config.properties` file if you changed your mysql db user and password
 
