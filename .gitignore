@@ -1,6 +1,3 @@
 *.pyc
 nohup.out
 motion_detector.log
-config.properties
-.ipynb_checkpoints/*
-mysite/*
