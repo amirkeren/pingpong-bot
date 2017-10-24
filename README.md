@@ -14,7 +14,7 @@ In addition, a Slack bot queries the DB to determine if there's an ongoing open 
 
 1. Run the setup script `setup.sh` to install the various dependencies
 
-2. Edit the `config.properties` file if you changed your mysql db user and password
+2. (Optional) Update the `config.properties` file if you changed the default mysql db user and password
 
 3. Run `python motion_detector.py` to begin monitoring
 
