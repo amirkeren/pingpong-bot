@@ -9,26 +9,15 @@ In addition, a Slack bot queries the DB to determine if there's an ongoing open 
 * RaspberryPi 3
 * PIR motion detector
 * Raspbian Jessie
-* Python 2.7
-* Pip
-* Mysql server
-* Slack client
-* Slack bot integration token
-* MysqlClient for Python
 
 # Getting Started
 
-1. Create a `config.properties` file in the root folder in the following format - 
+1. Run the setup script `./setup.sh`
 
-```
-[DatabaseSection]
-database.host=<host>
-database.user=<user>
-database.password=<password>
-```
+2. Edit the `config.properties` file if you changed your mysql db user and password
 
-2. Run `python motion_detector.py` to begin monitoring
+3. Run `python motion_detector.py` to begin monitoring
 
-3. Edit `pingpongbot.py` and replace `SLACK_BOT_TOKEN` and `SLACK_BOT_NAME` with the relevant Slack information
+4. Edit `pingpongbot.py` and replace `SLACK_BOT_TOKEN` and `SLACK_BOT_NAME` with the relevant Slack information
 
-4. Run `python pingpongbot.py` to start the Slack bot
+5. Run `python pingpongbot.py` to start the Slack bot
