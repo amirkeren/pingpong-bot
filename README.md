@@ -1,6 +1,6 @@
 # Motion Detector Project
 
-This code runs on RaspberryPi 3 and is used to check our Ping Pong table room in my company's offices to see if it's available or not :)
+This code runs on Raspberry Pi and is used to check our Ping Pong table room in my company's offices to see if it's available or not :)
 It uses a PIR motion detection sensor to detect movement and updates the Mysql DB accordingly.
 In addition, a Slack bot queries the DB to determine if there's an ongoing open session.
 
