@@ -119,12 +119,13 @@ def setup_database():
     except:
         pass
     try:
-        x.execute('''CREATE TABLE IF NOT EXISTS ''' + TABLE_NAME + ''' (
+	cmd = '''CREATE TABLE IF NOT EXISTS ''' + DB_NAME + '''.''' + TABLE_NAME + ''' (
             id smallint unsigned not null auto_increment, 
             start timestamp default current_timestamp, 
             end timestamp default 0, 
             last_updated timestamp, 
-            primary key (id)))''')
+            primary key (id))'''
+	x.execute(cmd)
         conn.commit()
     except:
         pass
